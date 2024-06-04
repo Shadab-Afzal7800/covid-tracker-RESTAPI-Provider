@@ -1,11 +1,19 @@
 import 'dart:async';
 
-import 'package:covid_tracker/animation/rotating_logo.dart';
-import 'package:covid_tracker/view/worlds_states.dart';
 import 'package:flutter/material.dart';
 
+import 'package:covid_tracker/animation/rotating_logo.dart';
+import 'package:covid_tracker/view/worlds_states.dart';
+
 class SplashScreen extends StatefulWidget {
-  const SplashScreen({super.key});
+  final ValueChanged<bool> onThemeChanged;
+  final bool isDarkMode;
+
+  const SplashScreen({
+    Key? key,
+    required this.onThemeChanged,
+    required this.isDarkMode,
+  }) : super(key: key);
 
   @override
   State<SplashScreen> createState() => _SplashScreenState();
@@ -19,7 +27,10 @@ class _SplashScreenState extends State<SplashScreen>
     Timer(
         Duration(seconds: 5),
         () => Navigator.push(
-            context, MaterialPageRoute(builder: (context) => WorldsStates())));
+            context,
+            MaterialPageRoute(
+                builder: (context) =>
+                    WorldsStates(onThemeChanged: widget.onThemeChanged))));
   }
 
   @override
